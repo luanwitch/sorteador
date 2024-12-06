@@ -1,0 +1,134 @@
+from iqoptionapi.stable_api import IQ_Option
+import time
+import os
+import cv2;
+import json
+from flask import Flask, redirect, url_for
+
+# Configurações
+EMAIL = "seu-email@example.com"
+SENHA = "sua-senha"
+PARIDADE = "EURUSD"  # Par de moedas
+TIMEFRAME = 1        # Tempo do candle em minutos
+VALOR_OPERACAO = 2   # Valor da operação
+STOP_GAIN = 20       # Limite de ganho
+STOP_LOSS = -20      # Limite de perda
+CAMINHO_IMAGENS = r"C:\git\botIQ\imagens"
+
+# Conexão com a IQ Option
+iq = IQ_Option(EMAIL, SENHA)
+iq.connect()
+
+if iq.check_connect():
+    print("Conectado à IQ Option!")
+else:
+    print("Erro ao conectar. Verifique suas credenciais.")
+    exit()
+
+iq.change_balance("PRACTICE")  # Usar conta de prática
+
+# Função para carregar imagens
+def carregar_imagem(nome_imagem):
+    caminho = os.path.join(CAMINHO_IMAGENS, nome_imagem)
+    if not os.path.exists(caminho):
+        print(f"Imagem não encontrada: {caminho}")
+        return None
+    return cv2.imread(caminho, cv2.IMREAD_COLOR)
+
+# Função para comparar imagens
+def comparar_imagens(imagem1, imagem2):
+    if imagem1 is None or imagem2 is None:
+        print("Uma ou ambas as imagens não foram carregadas corretamente.")
+        return False
+
+    imagem1 = cv2.resize(imagem1, (200, 200))
+    imagem2 = cv2.resize(imagem2, (200, 200))
+
+    diferenca = cv2.absdiff(imagem1, imagem2)
+    media_diferenca = cv2.mean(diferenca)
+
+    return sum(media_diferenca[:3]) < 50  # Limite ajustável
+
+# Função para obter velas
+def obter_velas(paridade, timeframe, quantidade):
+    velas = iq.get_candles(paridade, timeframe * 60, quantidade, time.time())
+    return [ 
+        {
+            "abertura": v["open"],
+            "fechamento": v["close"],
+            "cor": "verde" if v["close"] > v["open"] else "vermelha"
+        } for v in velas
+    ]
+
+# Função para calcular a cor minoritária
+def calcular_minoria(velas):
+    cores = [vela["cor"] for vela in velas]
+    verdes = cores.count("verde")
+    vermelhas = cores.count("vermelha")
+    return "verde" if verdes < vermelhas else "vermelha"
+
+# Função para realizar a operação
+def realizar_operacao(paridade, direcao, valor):
+    status, id_ordem = iq.buy(valor, paridade, direcao, TIMEFRAME)
+    if status:
+        print(f"Operação realizada: {direcao.upper()} no valor de ${valor}.")
+        while True:
+            status, lucro = iq.check_win_v3(id_ordem)
+            if status:
+                return lucro
+    else:
+        print("Erro ao realizar operação.")
+        return 0
+
+# Lógica principal
+lucro_total = 0
+try:
+    while True:
+        velas = obter_velas(PARIDADE, TIMEFRAME, 5)
+        minoria = calcular_minoria(velas)
+        print(f"Cor minoritária: {minoria}")
+        direcao = "call" if minoria == "verde" else "put"
+
+        print("Aguardando o início da sexta vela...")
+        time.sleep(TIMEFRAME * 60)
+
+        lucro = realizar_operacao(PARIDADE, direcao, VALOR_OPERACAO)
+        lucro_total += lucro
+        print(f"Lucro atual: ${lucro_total:.2f}")
+
+        if lucro_total >= STOP_GAIN:
+            print("Stop Gain alcançado. Encerrando operações.")
+            break
+        elif lucro_total <= STOP_LOSS:
+            print("Stop Loss alcançado. Encerrando operações.")
+            break
+
+except KeyboardInterrupt:
+    print("Bot interrompido pelo usuário.")
+
+finally:
+    iq.disconnect()
+    print("Desconectado da IQ Option.")
+
+# Configuração Flask
+app = Flask(__name__)
+
+@app.route("/")
+def index():
+    return "Página inicial do bot"
+
+@app.route("/restart")
+def restart():
+    return redirect(url_for("index"))
+
+# Testando carregamento e comparação de imagens
+imagem_verde = carregar_imagem("candleVerde.jpeg")
+imagem_vermelha = carregar_imagem("candleVermelho.jpeg")
+exemplo = carregar_imagem("exemplo.jpeg")  # Substituir pelo nome da imagem que deseja testar
+
+if comparar_imagens(imagem_verde, exemplo):
+    print("A imagem corresponde a uma vela verde.")
+elif comparar_imagens(imagem_vermelha, exemplo):
+    print("A imagem corresponde a uma vela vermelha.")
+else:
+    print("A imagem não corresponde a nenhuma vela conhecida.")

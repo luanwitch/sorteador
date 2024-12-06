@@ -1,0 +1,51 @@
+* {
+    padding: 0;
+    box-sizing: border-box;
+}  
+
+#resetButton {
+    background-color: #f44336; /* Cor de fundo vermelho */
+    color: white;              /* Cor do texto branco */
+    border: none;              /* Remove bordas */
+    padding: 10px 20px;        /* Espaçamento interno */
+    font-size: 16px;           /* Tamanho do texto */
+    border-radius: 5px;        /* Bordas arredondadas */
+    cursor: pointer;           /* Cursor muda para pointer */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    transition: background-color 0.3s, transform 0.2s; /* Animação suave */
+}
+
+/* Efeito ao passar o mouse */
+#resetButton:hover {
+    background-color: #d32f2f; /* Tom mais escuro de vermelho */
+    transform: scale(1.05);    /* Aumenta ligeiramente o botão */
+}
+
+/* Efeito ao clicar */
+#resetButton:active {
+    background-color: #b71c1c; /* Cor mais escura ao clicar */
+    transform: scale(0.95);    /* Reduz ligeiramente o botão */
+}
+
+#startBot {
+    background-color: #5cf436; /* Cor de fundo vermelho */
+    color: white;              /* Cor do texto branco */
+    border: none;              /* Remove bordas */
+    padding: 10px 20px;        /* Espaçamento interno */
+    font-size: 16px;           /* Tamanho do texto */
+    border-radius: 5px;        /* Bordas arredondadas */
+    cursor: pointer;           /* Cursor muda para pointer */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    transition: background-color 0.3s, transform 0.2s; /* Animação suave */
+}
+
+#startBot:hover {
+    background-color: #34d32f; /* Tom mais escuro de vermelho */
+    transform: scale(1.05);    /* Aumenta ligeiramente o botão */
+}
+
+/* Efeito ao clicar */
+#startBot:active {
+    background-color: #21b71c; /* Cor mais escura ao clicar */
+    transform: scale(0.95);    /* Reduz ligeiramente o botão */
+}
