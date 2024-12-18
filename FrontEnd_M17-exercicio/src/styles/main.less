@@ -1,0 +1,167 @@
+@import "maps.less";
+@import "./variaveis.less";
+@import "./variaveis.less";
+
+//scaping
+@breakPointMobile: ~"(max-width: 767px)";
+@breakPointTablet: ~"(min-width: 768px) and (max-width: 1023px)";
+
+
+body {
+    background-color: #colors[corPrincipal];
+    color: #colors[textColor];
+}
+
+li {
+    list-style: none;
+}
+
+.container {
+    max-width: 1024px;
+    width: 90%;
+    margin: 0 auto;
+
+    @media @breakPointTablet {
+        max-width: 80%;
+    }
+
+    @media @breakPointMobile {
+        max-width: 70%;
+    }
+}
+
+header {
+    padding-bottom: 24px;
+    //Imagem do cabeçalho
+    background-image: url('https://cdn.pixabay.com/photo/2019/07/14/16/29/pen-4337524_1280.jpg'); 
+    background-size: cover;     
+    background-position: center; 
+    background-repeat: no-repeat; 
+    height: 150px;           
+    display: flex;
+    align-items: center;         
+    justify-content: center;
+
+    .profile img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin: 0 auto 24px;
+        display: block;
+    }
+
+    background-color: #colors[corSecundaria];
+    top: 0;
+    left: 0;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+}
+
+.menu {
+    display: flex;
+}
+
+.menu li {
+    font-weight: bold;
+    margin-left: 24px;
+}
+
+.menu li a {
+    color: #colors[textColor];
+    text-decoration: none;
+}
+
+section {
+    padding: 56px 0;
+}
+
+.products {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(3, 32.66%);
+    column-gap: 1%;
+    row-gap: 4%;
+    width: 100%;
+}
+
+.products h4 {
+    margin-bottom: 16px;
+}
+
+.products p {
+    margin-bottom: 16px;
+    opacity: 0.8;
+}
+
+.product-item img {
+    width: 100%;
+    border-radius: 16px;
+}
+
+.product-button {
+    display: block;
+    background-color: #colors[buttonColor];
+    color: #colors[textColor];
+    text-align: center;
+    padding: 8px 0;
+    border-radius: 8px;
+    margin-top: 8px;
+    text-decoration: none;
+}
+
+.product-button:hover {
+    background-color: #colors[buttonColorHover];
+}
+
+footer {
+    background-color: #colors[corSecundaria];
+    padding: 30px 0;
+
+    .social-links {
+        display: flex;
+        justify-content: center; // Centraliza os ícones horizontalmente */
+        align-items: center;    // Alinha verticalmente */
+        gap: 16px;              // Espaçamento entre os ícones */
+        width: 100%;            // O container ocupa toda a largura */
+        margin: 0 auto;
+    }
+
+    .social-links li {
+        a {
+            display: flex;       /* Para alinhar ícones centralizados dentro dos links */
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            background-color: #colors[buttonColor];
+            color: #fff;
+            border-radius: 50%;
+            text-align: center;
+            transition: all 0.3s ease;
+    
+            &:hover {
+                background-color: #colors[buttonColorHover];
+                transform: scale(1.2);
+            }
+        }
+    
+        img {
+            display: block;    /* Remove o espaço em branco extra ao redor */
+            margin: 0 auto;    /* Centraliza a imagem horizontalmente */
+            max-width: 100%;   /* Garante que a imagem não ultrapasse o tamanho do container */
+            height: auto;      /* Mantém a proporção da imagem */
+        }
+    }
+}
+
+@media @breakPointMobile {
+    .social-links {
+        flex-direction: column; // Empilha os ícones em telas pequenas /
+    }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "frontend_m17-exercicio",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "less": "lessc C:/git/FrontEnd_M17-exercicio/src/styles/main.less C:/git/FrontEnd_M17-exercicio/build/styles/main.css",
+    "watch": "less-watch-compiler C:/git/FrontEnd_M17-exercicio/src/styles C:/git/FrontEnd_M17-exercicio/build/styles",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "clean-css": "^5.3.3",
+    "less": "^4.2.1",
+    "less-watch-compiler": "^1.16.3",
+    "npm-run-all": "^4.1.5"
+  }
+}

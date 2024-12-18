@@ -1,0 +1,163 @@
+body {
+  background-color: #40739e;
+}
+li {
+  list-style: none;
+}
+.containerPadrao {
+  max-width: 1024px;
+  width: 100%;
+  margin: 0 auto;
+}
+header {
+  background-color: #34495e;
+  position: sticky;
+  top: 0;
+  left: 0;
+}
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+}
+body {
+  background-color: #40739e;
+  color: #f5f6fa;
+}
+li {
+  list-style: none;
+}
+.container {
+  max-width: 1024px;
+  width: 90%;
+  margin: 0 auto;
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .container {
+    max-width: 80%;
+  }
+}
+@media (max-width: 767px) {
+  .container {
+    max-width: 70%;
+  }
+}
+header {
+  padding-bottom: 24px;
+  background-image: url('https://cdn.pixabay.com/photo/2019/07/14/16/29/pen-4337524_1280.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #34495e;
+  top: 0;
+  left: 0;
+}
+header .profile img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 0 auto 24px;
+  display: block;
+}
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
+.menu {
+  display: flex;
+}
+.menu li {
+  font-weight: bold;
+  margin-left: 24px;
+}
+.menu li a {
+  color: #f5f6fa;
+  text-decoration: none;
+}
+section {
+  padding: 56px 0;
+}
+.products {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(3, 32.66%);
+  column-gap: 1%;
+  row-gap: 4%;
+  width: 100%;
+}
+.products h4 {
+  margin-bottom: 16px;
+}
+.products p {
+  margin-bottom: 16px;
+  opacity: 0.8;
+}
+.product-item img {
+  width: 100%;
+  border-radius: 16px;
+}
+.product-button {
+  display: block;
+  background-color: #e67e22;
+  color: #f5f6fa;
+  text-align: center;
+  padding: 8px 0;
+  border-radius: 8px;
+  margin-top: 8px;
+  text-decoration: none;
+}
+.product-button:hover {
+  background-color: #8e44ad;
+}
+footer {
+  background-color: #34495e;
+  padding: 30px 0;
+}
+footer .social-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  margin: 0 auto;
+}
+footer .social-links li a {
+  display: flex;
+  /* Para alinhar ícones centralizados dentro dos links */
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  background-color: #e67e22;
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+footer .social-links li a:hover {
+  background-color: #8e44ad;
+  transform: scale(1.2);
+}
+footer .social-links li img {
+  display: block;
+  /* Remove o espaço em branco extra ao redor */
+  margin: 0 auto;
+  /* Centraliza a imagem horizontalmente */
+  max-width: 100%;
+  /* Garante que a imagem não ultrapasse o tamanho do container */
+  height: auto;
+  /* Mantém a proporção da imagem */
+}
+@media (max-width: 767px) {
+  .social-links {
+    flex-direction: column;
+  }
+}
