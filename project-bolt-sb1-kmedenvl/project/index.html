@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Mágica do Gulp! 🎮</title>
+    <link rel="stylesheet" href="dist/css/main.css">
+</head>
+<body>
+    <div class="header">
+        <h1>A Mágica do Gulp! ✨</h1>
+        <p>Vem descobrir como fazer sites de um jeito super legal!</p>
+    </div>
+
+    <div class="container">
+        <!-- Card do LESS -->
+        <div class="card">
+            <h2>🎨 O Pintor Mágico (LESS)</h2>
+            <p>O LESS é como uma tinta mágica que deixa seu CSS mais legal!</p>
+            <div class="code-box" id="less-box">
+                <div class="before">
+                    <h4>Antes:</h4>
+                    <pre>@cor: #FF6B6B;
+.botao {
+    background: @cor;
+    &:hover {
+        background: darken(@cor, 10%);
+    }
+}</pre>
+                </div>
+                <div class="arrow">➜</div>
+                <div class="after">
+                    <h4>Depois:</h4>
+                    <pre>.botao {
+    background: #FF6B6B;
+}
+.botao:hover {
+    background: #FF3838;
+}</pre>
+                </div>
+            </div>
+            <button class="button" onclick="showMagic('less')">Ver Mágica! ✨</button>
+        </div>
+
+        <!-- Card do Gulp -->
+        <div class="card">
+            <h2>🚀 O Gulp Mágico</h2>
+            <p>O Gulp é como um robô que faz todo o trabalho chato pra você!</p>
+            <div class="code-box" id="gulp-box">
+                <div class="before">
+                    <h4>Antes:</h4>
+                    <pre>gulp.task('magic', () => {
+    return gulp.src('*.less')
+        .pipe(less())
+        .pipe(gulp.dest('css'));
+});</pre>
+                </div>
+                <div class="arrow">➜</div>
+                <div class="after">
+                    <h4>Depois:</h4>
+                    <pre>✨ Arquivos LESS convertidos!
+📦 CSS minificado!
+🚀 Site atualizado!</pre>
+                </div>
+            </div>
+            <button class="button-secondary" onclick="showMagic('gulp')">Ativar Robô! 🤖</button>
+        </div>
+    </div>
+
+    <script>
+        function showMagic(type) {
+            const box = document.getElementById(`${type}-box`);
+            box.classList.add('show-magic');
+            setTimeout(() => box.classList.remove('show-magic'), 3000);
+        }
+    </script>
+</body>
+</html>
